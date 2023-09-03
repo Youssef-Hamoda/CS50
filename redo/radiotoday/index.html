@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RadioShack Redesign</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      /* Custom CSS to style buttons red */
+      .btn-primary {
+          background-color: red;
+          border-color: red;
+      }
+      .btn-secondary {
+          background-color: red;
+          border-color: red;
+      }
+  </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="radioshack-logo.png" alt="RadioShack Logo" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="#">Products</a>
+                    <a class="nav-link" href="#">Deals</a>
+                    <a class="nav-link" href="#">Store Locator</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header with Jumbotron -->
+    <header class="jumbotron">
+        <div class="container">
+            <h1 class="display-4">Welcome to the New RadioShack!</h1>
+            <!-- Removed the text below -->
+            <!--<p class="lead">Rediscover gadgets and electronics.</p>-->
+            <!-- Removed the button below -->
+            <!--<a class="btn btn-primary btn-lg" href="#" role="button">Shop Now</a>-->
+        </div>
+    </header>
+
+    <!-- Columns Section -->
+    <div class="container">
+      <div class="row">
+          <div class="col-md-4">
+              <h2>Featured Products</h2>
+              <p>Explore our curated selection of top-rated products.</p>
+              <!-- Apply btn-primary class to make the button red -->
+              <a class="btn btn-primary" href="#" role="button">View More &raquo;</a>
+          </div>
+          <div class="col-md-4">
+              <h2>Deals of the Day</h2>
+              <p>Check out our daily deals and save big.</p>
+              <!-- Apply btn-primary class to make the button red -->
+              <a class="btn btn-primary" href="#" role="button">View Deals &raquo;</a>
+          </div>
+          <div class="col-md-4">
+              <h2>Visit Us</h2>
+              <p>Find a RadioShack store near you.</p>
+              <!-- Apply btn-primary class to make the button red -->
+              <a class="btn btn-primary" href="#" role="button">Find a Store &raquo;</a>
+          </div>
+      </div>
+  </div>
+
+  <!-- Bootstrap JS (Optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    <!-- Buy Form -->
+    <div class="mb-3">
+        <form action="/buy" method="post" onsubmit="addBuy()">
+            <div class="mb-3">
+                <!-- Input for Stock Symbol -->
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="symbol" name="symbol" placeholder="Stock symbol" type="text" required>
+            </div>
+            <div class="mb-3">
+                <!-- Input for Quantity -->
+                <input class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="Quantity" type="number" required>
+            </div>
+            <!-- Submit Button -->
+            <button class="btn btn-primary" type="submit">Buy</button>
+        </form>
+    </div>
+
+    <!-- Purchase History Table -->
+    <h2>Purchase History</h2>
+    <table class="portfolio-table" id="buyTable">
+        <thead>
+            <tr>
+                <th>Transaction</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Shares</th>
+                <th>Total</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in History %}
+                <tr>
+                    <td>{{ transaction.type }}</td>
+                    <td>{{ transaction.stock }}</td>
+                    <td>{{ transaction.price_per }}</td>
+                    <td>{{ transaction.quantity }}</td>
+                    <td>{{ transaction.price }}</td>
+                    <td>{{ transaction.time }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- JavaScript Function to Add Buy Transaction -->
+    <script>
+        function addBuy() {
+            event.preventDefault();
+
+            // Get the symbol and shares from the input fields
+            const symbol = document.getElementById("symbol").value;
+            const shares = document.getElementById("shares").value;
+
+            // Create FormData with symbol and shares
+            const formData = new FormData();
+            formData.append("symbol", symbol);
+            formData.append("shares", shares);
+
+            // Send a POST request to /buy with symbol and shares
+            fetch("/buy", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    // If there's an error, display an alert
+                    alert(data.error);
+                } else {
+                    // If successful, add a new row to the table with transaction details
+                    const tableBody = document.querySelector("#buyTable tbody");
+                    const newRow = tableBody.insertRow(0);
+                    newRow.innerHTML = `
+                        <td>${data.type}</td>
+                        <td>${data.symbol}</td>
+                        <td>${data.price_per}</td>
+                        <td>${data.shares}</td>
+                        <td>${data.price}</td>
+                        <td>${data.time}</td>
+                    `;
+
+                    // Clear the input fields
+                    document.getElementById("symbol").value = "";
+                    document.getElementById("shares").value = "";
+
+                    // Update the cash counter
+                    const cashCounter = document.querySelector("#cash_counter a");
+                    cashCounter.innerHTML = `Cash: ${data.cash}`;
+                }
+            });
+        }
+    </script>
+{% endblock %}

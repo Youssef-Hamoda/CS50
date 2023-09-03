@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <!-- Portfolio Table -->
+    <h2>Portfolio</h2>
+    <table class="portfolio-table">
+        <thead>
+            <tr>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Shares</th>
+                <th>Percent Change</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through each stock in Stocks and display it in a row -->
+            {% for stock in Stocks %}
+                <tr>
+                    <td>{{ stock.stock }}</td>
+                    <td>{{ stock.price_per }}</td>
+                    <td>{{ stock.quantity }}</td>
+                    <td>{{ stock.percent_change }}</td>
+                    <td>{{ stock.price }}</td>
+                </tr>
+            {% endfor %}
+            <!-- Display Cash and Total -->
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
+                <td>{{ Cash }}</td>
+            </tr>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4">Total</td>
+                <td>{{ portfolio_value }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

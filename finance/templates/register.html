@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <!-- Registration Form -->
+    <form action="/register" method="post">
+        <div class="mb-3">
+            <!-- Input for Username -->
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <!-- Input for Password -->
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="mb-3">
+            <!-- Input for Password Confirmation -->
+            <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirm Password" type="password">
+            <!-- Toggle Password Button -->
+            <button class="btn btn-secondary btn-sm" type="button" id="toggle-password" onclick="togglePassword(['password', 'confirmation'])">Toggle Password</button>
+        </div>
+        <!-- Register Button -->
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+
+    <!-- JavaScript for Toggling Password Visibility -->
+    <script src="/static/togglePassword.js"></script>
+{% endblock %}

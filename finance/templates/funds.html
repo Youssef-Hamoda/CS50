@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Funds
+{% endblock %}
+
+{% block main %}
+    <!-- Deposit Funds Form -->
+    <div class="mb-3">
+        <form action="/funds" method="post" onsubmit="addFunds()">
+            <div class="mb-3">
+                <!-- Input for Funds -->
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="funds" name="funds" placeholder="Funds" type="number" required>
+            </div>
+            <!-- Submit Button -->
+            <button class="btn btn-primary" type="submit">Deposit</button>
+        </form>
+    </div>
+
+    <!-- JavaScript Function to Add Funds -->
+    <script>
+        function addFunds() {
+            event.preventDefault();
+
+            // Get the amount of funds to deposit from the input field
+            const funds = document.getElementById("funds").value;
+
+            // Create FormData with funds
+            const formData = new FormData();
+            formData.append("funds", funds);
+
+            // Send a POST request to /funds with the deposited funds
+            fetch("/funds", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    // If there's an error, display an alert
+                    alert(data.error);
+                } else {
+                    // If successful, update the cash counter with the new cash balance
+                    const cashCounter = document.querySelector("#cash_counter a");
+                    cashCounter.innerHTML = `Cash: ${data.cash}`;
+
+                    // Clear the input field
+                    document.getElementById("funds").value = "";
+                }
+            });
+        }
+    </script>
+{% endblock %}

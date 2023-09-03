@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <!-- Transaction History Table -->
+    <h2>Transaction History</h2>
+    <table class="portfolio-table">
+        <thead>
+            <tr>
+                <th>Stock</th>
+                <th>Transaction</th>
+                <th>Price</th>
+                <th>Shares</th>
+                <th>Total</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through each transaction in History and display it in a row -->
+            {% for transaction in History %}
+                <tr>
+                    <td>{{ transaction.stock }}</td>
+                    <td>{{ transaction.type }}</td>
+                    <td>{{ transaction.price_per }}</td>
+                    <td>{{ transaction.quantity }}</td>
+                    <td>{{ transaction.price }}</td>
+                    <td>{{ transaction.time }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

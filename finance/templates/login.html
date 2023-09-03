@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+    <!-- Log In Form -->
+    <form action="/login" method="post">
+        <!-- Username Input -->
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+        </div>
+        <!-- Password Input -->
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+            <!-- Toggle Password Button -->
+            <button class="btn btn-secondary btn-sm" type="button" id="toggle-password" onclick="togglePassword(['password'])">Toggle Password</button>
+        </div>
+        <!-- Log In Button -->
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
+    <!-- Include JavaScript to Toggle Password Visibility -->
+    <script src="/static/togglePassword.js"></script>
+{% endblock %}

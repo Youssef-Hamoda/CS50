@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <!-- Quote Form -->
+    <div class="mb-3">
+        <form action="/quote" method="post" onsubmit="addQuote()">
+            <div class="mb-3">
+                <!-- Input for Stock Symbol -->
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="symbol" name="symbol" placeholder="Stock symbol" type="text" required>
+            </div>
+            <!-- Submit Button -->
+            <button class="btn btn-primary" type="submit">Quote</button>
+        </form>
+    </div>
+
+    <!-- Quote History Table -->
+    <h2>Quote History</h2>
+    <table class="portfolio-table" id="quotesTable">
+        <thead>
+            <tr>
+                <th>Stock</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- JavaScript Function to Add Quote -->
+    <script>
+        function addQuote() {
+            event.preventDefault();
+
+            // Get the symbol from the input field
+            const symbol = document.getElementById("symbol").value;
+
+            // Create FormData with the symbol
+            const formData = new FormData();
+            formData.append("symbol", symbol);
+
+            // Send a POST request to /quote with the symbol
+            fetch("/quote", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    // If there's an error, display an alert
+                    alert(data.error);
+                } else {
+                    // If successful, add a new row to the table with the symbol and price
+                    const tableBody = document.querySelector("#quotesTable tbody");
+                    const newRow = tableBody.insertRow(0);
+                    newRow.innerHTML = `
+                        <td>${data.symbol}</td>
+                        <td>$${data.price}</td>
+                    `;
+
+                    // Clear the input field
+                    document.getElementById("symbol").value = "";
+                }
+            });
+        }
+     </script>
+{% endblock %}

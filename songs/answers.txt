@@ -1,0 +1,1 @@
+Kind of basic. It doesn't consider all parts of the song like tempo or lyrics. I would propose considering aura based on all data on the song like genre etc. to better decide on an aura.
